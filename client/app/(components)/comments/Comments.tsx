@@ -13,9 +13,9 @@ export default function Comments({ comments }: { comments: comments[] | null }) 
     return (
         <div className="flex flex-col gap-3">
             {
-                comments.map((comment) => {
+                comments.map((comment, index) => {
                     return (
-                        <Comment comment={comment} />
+                        <Comment key={`${index}-comment`} comment={comment} />
                     )
                 })
             }

@@ -1,6 +1,6 @@
 <div align=center>
 <h1>Online Library</h1>
-<p>V. 0.1.0</p>
+<p>V. 0.1.1</p>
 </div>
 
 ---

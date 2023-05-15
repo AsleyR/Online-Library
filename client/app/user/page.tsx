@@ -11,14 +11,14 @@ const LogoutButton = () => {
     )
 }
 
-function page() {
+function UserPage() {
 
     const { user, error, isLoading } = useUser()
 
     return (
         <div className='flex flex-col gap-5'>
             <div className="">
-                <h1 className='font-bold text-2xl'>Account's Info</h1>
+                <h1 className='font-bold text-2xl'>{`Account's Info`}</h1>
                 <p>Username: <span className=''>{user?.nickname}</span></p>
                 <p>Email: <span className='underline'>{user?.email}</span></p>
             </div>
@@ -29,7 +29,11 @@ function page() {
     )
 }
 
-export default withPageAuthRequired(page, {
-    onRedirecting: () => <div>...Loading</div>,
-    onError: (error) => <div>{error.message}</div>
-})
+export default function Page() {
+    return (
+        withPageAuthRequired(UserPage, {
+            onRedirecting: () => <div>...Loading</div>,
+            onError: (error) => <div>{error.message}</div>
+        })
+    )
+}

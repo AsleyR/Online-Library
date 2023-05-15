@@ -18,14 +18,6 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
     const router = useRouter()
     const { user, error, isLoading } = useUser()
 
-    if (isLoading) {
-        return (
-            <div className="">
-                <p>loading...</p>
-            </div>
-        )
-    }
-
     const [input, setInput] = useState<AddCommentsProps['input']>({
         "comment": ""
     })
@@ -70,7 +62,6 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
             bookId: comment.bookId,
         })
 
-        console.log(formBody)
         deleteInput()
 
         fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/create`, {
