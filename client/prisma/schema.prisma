@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type BooksPublishedBy {
+  email    String
+  username String
+}
+
+type CommentsAuthor {
+  email    String
+  username String
+}
+
+model books {
+  id              String           @id @default(auto()) @map("_id") @db.ObjectId
+  author          String
+  bookReleaseDate Int
+  publishedBy     BooksPublishedBy
+  publishedDate   DateTime         @db.Date
+  tags            String[]
+  title           String
+}
+
+model comments {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  author        CommentsAuthor
+  bookId        String
+  comment       String
+  publishedDate DateTime       @db.Date
+}
