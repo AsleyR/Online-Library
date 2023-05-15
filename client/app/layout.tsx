@@ -1,5 +1,8 @@
+import { UserProvider } from '@auth0/nextjs-auth0/client'
+
 import './globals.css'
 import { Inter } from 'next/font/google'
+import Navbar from './(components)/navbar/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +18,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}
+        suppressHydrationWarning={true}
+      >
+        <UserProvider>
+          <Navbar />
+          <div className="px-mobilex md:px-normalx my-[2rem]">
+            {children}
+          </div>
+        </UserProvider>
+      </body>
     </html>
   )
 }
