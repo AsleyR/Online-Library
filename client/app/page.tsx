@@ -14,9 +14,16 @@ export default function Home() {
     <main className="grid gap-3">
       <h1 className='font-bold text-3xl'>Welcome to your online library!</h1>
       <div className="">
-        <button className='bg-blue-400 text-white hover:scale-105 transition-all px-3 py-2 rounded'>
-          <Link href={'/books'}>See books</Link>
-        </button>
+        <div className="">
+          <Link
+            className=''
+            href={'/books'}
+          >
+            <button className='bg-blue-400 text-white hover:scale-105 transition-all px-3 py-2 rounded'>
+              See books
+            </button>
+          </Link>
+        </div>
       </div>
     </main>
   )
