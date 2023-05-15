@@ -1,10 +1,23 @@
 "use client"
 
 import CreateBook from "@/app/(components)/book/CreateBook";
-import { withPageAuthRequired } from "@auth0/nextjs-auth0/client";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
+export default function Page() {
+    const router = useRouter()
+    const { user, error, isLoading } = useUser()
 
-function CreatePage() {
+    useEffect(() => {
+        if (!user) {
+            router.push('/api/auth/login')
+        }
+    }, [user])
+
+    if (!user) {
+        return <></>
+    }
 
     return (
         <div className="flex flex-col gap-5">
@@ -13,12 +26,3 @@ function CreatePage() {
         </div>
     )
 }
-
-export default function Page() {
-    return (
-        withPageAuthRequired(CreatePage, {
-            onRedirecting: () => <div>...Loading</div>,
-            onError: (error) => <div>{error.message}</div>
-        })
-    )
-} 

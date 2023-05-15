@@ -1,7 +1,9 @@
 "use client"
 
-import { useUser, withPageAuthRequired } from '@auth0/nextjs-auth0/client'
+import { useUser } from '@auth0/nextjs-auth0/client'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
 
 const LogoutButton = () => {
     return (
@@ -11,14 +13,24 @@ const LogoutButton = () => {
     )
 }
 
-function UserPage() {
-
+export default function Page() {
+    const router = useRouter()
     const { user, error, isLoading } = useUser()
+
+    useEffect(() => {
+        if (!user) {
+            router.push('/api/auth/login')
+        }
+    }, [user])
+
+    if (!user) {
+        return <></>
+    }
 
     return (
         <div className='flex flex-col gap-5'>
             <div className="">
-                <h1 className='font-bold text-2xl'>{`Account's Info`}</h1>
+                <h1 className='font-bold text-2xl'>Account Info</h1>
                 <p>Username: <span className=''>{user?.nickname}</span></p>
                 <p>Email: <span className='underline'>{user?.email}</span></p>
             </div>
@@ -29,11 +41,11 @@ function UserPage() {
     )
 }
 
-export default function Page() {
-    return (
-        withPageAuthRequired(UserPage, {
-            onRedirecting: () => <div>...Loading</div>,
-            onError: (error) => <div>{error.message}</div>
-        })
-    )
-}
+// export default function Page() {
+//     return (
+//         withPageAuthRequired(UserPage, {
+//             onRedirecting: () => <div>...Loading</div>,
+//             onError: (error) => <div>{error.message}</div>
+//         })
+//     )
+// }
