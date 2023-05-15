@@ -52,9 +52,9 @@ const BooksPage = async ({ searchParams }: BooksPageProps) => {
                     books.length !== 0 ?
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                             {
-                                books.map((book) => {
+                                books.map((book, index) => {
                                     return (
-                                        <Link href={`/books/${book.id}`}>
+                                        <Link key={`${index}-book-link`} href={`/books/${book.id}`}>
                                             <BookCard book={book} />
                                         </Link>
                                     )
