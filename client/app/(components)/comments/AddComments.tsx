@@ -79,11 +79,11 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
             className="flex items-center align-middle gap-2"
         >
             {
-                user ? <Image
+                user && user.picture ? <Image
                     className="rounded-full w-10 h-10"
                     width={100}
                     height={100}
-                    src={user.picture || ""}
+                    src={user.picture}
                     alt="user icon"
                 /> : <DefaultUserIcon />
             }

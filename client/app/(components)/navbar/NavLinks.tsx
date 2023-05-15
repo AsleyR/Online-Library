@@ -10,7 +10,7 @@ import NavSearchIcon from "./NavSearchIcon"
 
 interface UserIconProps {
     auth: boolean;
-    picture: string | null;
+    picture: string | null | undefined;
     className?: string
 }
 
@@ -22,7 +22,7 @@ export const DefaultUserIcon = () => {
     )
 }
 
-const UserIcon = ({ auth, picture, className }: UserIconProps) => {
+export const UserIcon = ({ auth, picture, className }: UserIconProps) => {
 
     if (!auth) {
         return (
@@ -76,7 +76,7 @@ const NavLinks = () => {
                 {
                     user ? <AddBookButton /> : null
                 }
-                <UserIcon className="" auth={true} picture={user?.picture || null} />
+                <UserIcon className="" auth={user ? true : false} picture={user?.picture} />
             </ul>
         </div>
     )
