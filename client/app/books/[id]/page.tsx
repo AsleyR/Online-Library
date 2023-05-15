@@ -29,7 +29,7 @@ const BookPage = async ({ params }: BookPageProps) => {
             <Book book={book} />
             <div className="flex flex-col gap-3">
                 <h1 className='font-bold text-xl'>
-                    {comments?.length} {comments?.length !== 1 && comments?.length ? "Comments" : "Comment"}
+                    {comments?.length} {comments?.length === 1 && comments?.length ? "Comment" : "Comments"}
                 </h1>
                 <AddComments bookId={params.id} />
                 <Comments comments={comments} />
