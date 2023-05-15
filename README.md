@@ -14,7 +14,7 @@ Online library project made with [Next 13](https://nextjs.org/), [prisma](https:
 
 ## API Documentation
 
-Pending
+Pending.
 
 ## License
 
