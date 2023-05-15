@@ -14,7 +14,11 @@ function CreatePage() {
     )
 }
 
-export default withPageAuthRequired(CreatePage, {
-    onRedirecting: () => <div>...Loading</div>,
-    onError: (error) => <div>{error.message}</div>
-})
+export default function Page() {
+    return (
+        withPageAuthRequired(CreatePage, {
+            onRedirecting: () => <div>...Loading</div>,
+            onError: (error) => <div>{error.message}</div>
+        })
+    )
+} 
