@@ -1,51 +1,31 @@
-"use client"
+import UserBooks from '../(components)/book/UserBooks'
+import UserInfo from '../(components)/user/UserInfo'
+import getAllBooks from '../(actions)/books/getAllBooks'
 
-import { useUser } from '@auth0/nextjs-auth0/client'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-const LogoutButton = () => {
-    return (
-        <button className='bg-red-500 hover:scale-105 transition-all text-white px-5 py-2 rounded'>
-            <Link href={'/api/auth/logout'}>Logout</Link>
-        </button>
-    )
+interface UserPageProps {
+    props: {
+        params: {
+            id: string
+        }
+    }
 }
 
-export default function Page() {
-    const router = useRouter()
-    const { user, error, isLoading } = useUser()
-
-    useEffect(() => {
-        if (!user) {
-            router.push('/api/auth/login')
+export default async function Page({ params }: UserPageProps['props']) {
+    const books = await getAllBooks()
+    const userBooks: any = []
+    books.map((book) => {
+        if (book.publishedBy.email === "asleyrobleto@hotmail.com") {
+            userBooks.push(book)
         }
-    }, [user])
-
-    if (!user) {
-        return <></>
-    }
+    })
 
     return (
         <div className='flex flex-col gap-5'>
+            <UserInfo />
             <div className="">
-                <h1 className='font-bold text-2xl'>Account Info</h1>
-                <p>Username: <span className=''>{user?.nickname}</span></p>
-                <p>Email: <span className='underline'>{user?.email}</span></p>
-            </div>
-            <div className="flex justify-center">
-                <LogoutButton />
+                {/* {await UserBooks({ user: user })} */}
+                <UserBooks books={userBooks} />
             </div>
         </div>
     )
 }
-
-// export default function Page() {
-//     return (
-//         withPageAuthRequired(UserPage, {
-//             onRedirecting: () => <div>...Loading</div>,
-//             onError: (error) => <div>{error.message}</div>
-//         })
-//     )
-// }
