@@ -1,23 +1,50 @@
 import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient()
 
+// Delete book(s)
 export async function POST(request: Request) {
+    const { searchParams } = new URL(request.url)
+    const quantity = searchParams.get('quantity') || "single"
     const res = await request.json()
 
-    if (!res.id) {
+    let deleteBook: any = null
 
-        return new Response(JSON.stringify({ error: "Wrong request." }), {
-            status: 400
-        })
+    if (quantity === "many") {
+
+        if (!res.email) {
+            return new Response(JSON.stringify({
+                error: "Bad request.",
+                casue: "Missing or incorrect 'email' parameter"
+            }), {
+                status: 400
+            })
+        }
+
+        deleteBook = await prisma.books.deleteMany({
+            "where": {
+                "author": res.email
+            }
+        }).catch(error => error)
+
+    } else {
+
+        if (!res.bookId) {
+            return new Response(JSON.stringify({
+                error: "Bad request.",
+                cause: "Missing 'bookId' parameter"
+            }), {
+                status: 400
+            })
+        }
+
+        deleteBook = await prisma.books.delete({
+            "where": {
+                "id": res.bookId
+            }
+        }).catch(error => error)
     }
 
-    const newComment = await prisma.books.delete({
-        "where": {
-            "id": res.id
-        }
-    }).catch(error => error)
-
-    return new Response(JSON.stringify(newComment), {
+    return new Response(JSON.stringify(deleteBook), {
         status: 200
     })
 }
