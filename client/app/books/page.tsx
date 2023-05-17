@@ -47,7 +47,6 @@ const BooksPage = async ({ searchParams }: BooksPageProps) => {
         <section className="my-[1rem]">
             <div className="flex flex-col gap-6">
                 <SearchBar value={searchParam || ""} filter={filter} />
-                {/* <h1>{searchParam || ""}</h1> */}
                 {
                     books.length !== 0 ?
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
