@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { comments } from "@prisma/client";
 import Image from "next/image";
-import { DefaultUserIcon } from "../navbar/NavLinks";
+import DefaultUserIcon from "../user-icons/DefaultUserIcon";
 
 interface AddCommentsProps {
     input: {
@@ -26,6 +26,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
         "id": "",
         "author": {
             "email": user?.email || "",
+            "profilePicture": user?.picture || "",
             "username": user?.nickname || user?.email || "User"
         },
         "comment": input.comment,
@@ -46,7 +47,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
         })
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
@@ -64,7 +65,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
 
         deleteInput()
 
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/create`, {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/create`, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: formBody
@@ -76,7 +77,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
     return (
         <form action={"/api/comments/create"} method={'POST'}
             onSubmit={handleSubmit}
-            className="flex items-center align-middle gap-2"
+            className="flex items-center align-middle gap-2 bg-gray-200 rounded-lg p-3"
         >
             {
                 user && user.picture ? <Image
@@ -89,7 +90,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
             }
             <div className="relative max-w-xs">
                 <input
-                    className=" w-full border-b border-black placeholder:text-black focus:outline-none active:outline-none"
+                    className=" w-full border-b bg-inherit border-black placeholder:text-black focus:outline-none active:outline-none"
                     type={'text'}
                     name="comment"
                     id="comment"
