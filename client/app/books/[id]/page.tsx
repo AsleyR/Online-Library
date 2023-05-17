@@ -27,13 +27,7 @@ const BookPage = async ({ params }: BookPageProps) => {
     return (
         <div className='my-[2rem] flex flex-col gap-5'>
             <Book book={book} />
-            <div className="flex flex-col gap-3">
-                <h1 className='font-bold text-xl'>
-                    {comments?.length} {comments?.length === 1 && comments?.length ? "Comment" : "Comments"}
-                </h1>
-                <AddComments bookId={params.id} />
-                <Comments comments={comments} />
-            </div>
+            <Comments comments={comments} bookId={params.id} />
         </div >
     )
 }
