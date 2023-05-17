@@ -13,8 +13,9 @@ type BooksPublishedBy {
 }
 
 type CommentsAuthor {
-  email    String
-  username String
+  email          String
+  username       String
+  profilePicture String
 }
 
 model books {
