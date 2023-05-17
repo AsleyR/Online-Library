@@ -88,13 +88,6 @@ export default function CreateBook() {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        const formData = new FormData(e.currentTarget)
-
-        const json: any = {}
-        formData.forEach((value, prop) => {
-            return json[prop] = value
-        })
-
         const formBody = JSON.stringify({
             title: input.title,
             author: input.author,
@@ -133,7 +126,7 @@ export default function CreateBook() {
             className="flex flex-col gap-3"
             onSubmit={handleSubmit}
         >
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
                 <label htmlFor="title">Title</label>
                 <input
                     className="border-2 px-2 border-black focus:outline-none"
@@ -144,7 +137,7 @@ export default function CreateBook() {
                     value={input.title}
                 />
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
                 <label htmlFor="author">Author</label>
                 <input
                     className="border-2 px-2 border-black focus:outline-none"
@@ -155,7 +148,7 @@ export default function CreateBook() {
                     value={input.author}
                 />
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
                 <label htmlFor="bookReleaseDate">Book release date</label>
                 <input
                     className="border-2 px-2 border-black focus:outline-none"
@@ -166,25 +159,27 @@ export default function CreateBook() {
                     value={input.bookReleaseDate}
                 />
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-col md:flex-row gap-2 items-start md:items-center">
                 <label htmlFor="tags">Add tags</label>
-                <input
-                    className="border-2 px-2 border-black focus:outline-none"
-                    type={'text'}
-                    name="tags"
-                    id="tags"
-                    onChange={handleChange}
-                    value={input.tags}
-                />
-                <button
-                    className="bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center align-middle justify-center"
-                    type={'button'}
-                    onClick={handleAddTags}
-                >
-                    <FontAwesomeIcon className="" icon={faPlus} />
-                </button>
+                <div className="flex gap-3 md:gap-2">
+                    <input
+                        className="border-2 px-2 border-black focus:outline-none"
+                        type={'text'}
+                        name="tags"
+                        id="tags"
+                        onChange={handleChange}
+                        value={input.tags}
+                    />
+                    <button
+                        className="bg-gray-200 hover:bg-gray-300 rounded w-8 h-8 flex items-center align-middle justify-center"
+                        type={'button'}
+                        onClick={handleAddTags}
+                    >
+                        <FontAwesomeIcon className="" icon={faPlus} />
+                    </button>
+                </div>
             </div>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
                 {
                     book.tags.length !== 0 ?
                         book.tags.map((tag, index) => {
@@ -192,14 +187,14 @@ export default function CreateBook() {
                                 <p key={`${index}-book-tag`}
                                     id={`${index}`}
                                     onClick={removeTag}
-                                    className="bg-gray-200 rounded px-3 py-1 cursor-pointer">
+                                    className="bg-gray-200 hover:scale-105 duration-200 rounded px-3 py-1 cursor-pointer">
                                     {tag}
                                 </p>
                             )
                         }) : <p className="font-bold">No tags added yet</p>
                 }
             </div>
-            <div className="">
+            <div className="grid md:block">
                 <button
                     type={'submit'}
                     className="bg-red-500 text-white hover:scale-105 transition-all px-3 py-1 rounded"
