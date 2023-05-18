@@ -1,6 +1,12 @@
 import UserInfo from '../(components)/user/UserInfo'
 import getAllBooks from '../(actions)/books/getAllBooks'
 
+export function generateMetadata() {
+    return {
+        "title": `User - Online Library`
+    }
+}
+
 export default async function Page() {
     const books = await getAllBooks()
 

@@ -8,6 +8,21 @@ interface EditPageProps {
     }
 }
 
+type MetadataProps = {
+    params: {
+        id: string
+    }
+}
+
+export async function generateMetadata({ params }: MetadataProps) {
+    const bookId = params.id
+    const bookTitle = await getBookById(bookId).then((book) => book?.title)
+
+    return {
+        "title": `${bookTitle}'s Book Options - Online Library`
+    }
+}
+
 export default async function Page({ params }: EditPageProps) {
     const book = await getBookById(params.id).catch(err => null)
 
