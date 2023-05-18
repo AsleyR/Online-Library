@@ -7,11 +7,26 @@ import getAllBooks from "../(actions)/books/getAllBooks";
 import getBooksByAuthor from "../(actions)/books/getBooksbyAuthor";
 import getBooksByYear from "../(actions)/books/getBooksByYear";
 import getBooksByTags from "../(actions)/books/getBooksByTags";
+import BookCards from "../(components)/book/BookCards";
 
 interface BooksPageProps {
     searchParams: {
         search?: string;
         filter?: string;
+    }
+}
+
+type MetadataProps = {
+    searchParams: {
+        search?: string;
+    }
+}
+
+export function generateMetadata({ searchParams }: MetadataProps) {
+    const search = searchParams.search || "Search"
+
+    return {
+        'title': `${search} - Online Library`
     }
 }
 
@@ -49,17 +64,7 @@ const BooksPage = async ({ searchParams }: BooksPageProps) => {
                 <SearchBar value={searchParam || ""} filter={filter} />
                 {
                     books.length !== 0 ?
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                            {
-                                books.map((book, index) => {
-                                    return (
-                                        <Link key={`${index}-book-link`} href={`/books/${book.id}`}>
-                                            <BookCard book={book} />
-                                        </Link>
-                                    )
-                                })
-                            }
-                        </div> :
+                        <BookCards books={books} /> :
                         <div className="flex justify-center">
                             <h1 className="font-medium text-xl">No results</h1>
                         </div>
