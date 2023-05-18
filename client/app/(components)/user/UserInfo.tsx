@@ -26,6 +26,8 @@ export default function UserInfo({ books }: { books: books[] }) {
         }
     })
 
+    console.log(userBooks)
+
     useEffect(() => {
         if (!user) {
             router.push('/api/auth/login')
@@ -46,7 +48,7 @@ export default function UserInfo({ books }: { books: books[] }) {
             <div className="flex justify-center">
                 <LogoutButton />
             </div>
-            <UserBooks books={books} />
+            <UserBooks books={userBooks} />
         </>
     )
 }
