@@ -76,8 +76,6 @@ export default function EditBookForm({ book }: EditBookFormProps['props']) {
             }
         })
 
-        console.log(newTags)
-
         setEditBook({
             ...editBook,
             tags: newTags
@@ -88,6 +86,7 @@ export default function EditBookForm({ book }: EditBookFormProps['props']) {
         e.preventDefault()
 
         const formBody = JSON.stringify({
+            bookId: book.id,
             title: input.title,
             author: input.author,
             bookReleaseDate: input.bookReleaseDate,
@@ -100,9 +99,7 @@ export default function EditBookForm({ book }: EditBookFormProps['props']) {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: formBody
-        }).catch(err => console.log(err))
-
-        router.push(`/books/${book.id}`)
+        }).catch(err => console.log(err)).then(() => router.push(`/books/${book.id}`))
     }
 
     return (
