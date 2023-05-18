@@ -4,7 +4,8 @@ import { useUser } from "@auth0/nextjs-auth0/client";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { books } from "@prisma/client";
-import { useState } from "react"
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react"
 
 interface CreateBookProps {
     newBook: {
@@ -20,7 +21,14 @@ interface CreateBookProps {
 }
 
 export default function CreateBook() {
+    const router = useRouter()
     const { user, error, isLoading } = useUser()
+
+    useEffect(() => {
+        if (!user) {
+            router.push('/api/auth/login')
+        }
+    }, [user])
 
     const [input, setInput] = useState<CreateBookProps['newBook']['input']>({
         "title": "",
@@ -102,7 +110,7 @@ export default function CreateBook() {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: formBody
-        }).catch(err => console.log(err))
+        }).catch(err => console.log(err)).then(() => router.push('/books'))
 
         setInput({
             "author": "",
