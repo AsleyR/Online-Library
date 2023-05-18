@@ -19,7 +19,7 @@ export default function UserInfo({ books }: { books: books[] }) {
     const router = useRouter()
     const { user, error, isLoading } = useUser()
 
-    let userBooks = []
+    let userBooks: any = []
     books.map((book) => {
         if (book.publishedBy.email === user?.email) {
             userBooks.push(book)
