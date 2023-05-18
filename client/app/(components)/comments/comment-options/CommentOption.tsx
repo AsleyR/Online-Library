@@ -4,8 +4,10 @@ import { CommentOptionsType } from "@/app/(libs)/context/CommentOptions"
 import React, { useContext } from "react"
 import { CommentOptionsContext } from "../Comment";
 import deleteComment from "@/app/(libs)/deleteComment";
+import { useRouter } from "next/navigation";
 
 export default function CommentOption({ commentId }: { commentId: string }) {
+    const router = useRouter()
 
     const { commentOptions, setCommentOptions } = useContext(CommentOptionsContext) as CommentOptionsType
 
@@ -15,7 +17,7 @@ export default function CommentOption({ commentId }: { commentId: string }) {
 
     const setDelete = (state: boolean) => {
         setCommentOptions({ edit: false, delete: state, render: false })
-        deleteComment(commentId)
+        deleteComment(commentId).then(() => router.refresh())
     }
 
     const setEdit = (state: boolean) => {
