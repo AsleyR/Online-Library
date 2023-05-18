@@ -51,15 +51,13 @@ export default function EditCommentForm({ className, comment }: EditCommentFormP
             newComment: input.comment
         })
 
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/update`, {
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/comments/update`, {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: formBody
-        }).catch(err => console.log(err))
+        }).catch(err => console.log(err)).then(() => router.refresh())
 
         setCommentOptions({ "delete": false, "edit": false, render: false })
-
-        router.refresh()
     }
 
     return (
