@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
 
 export default async function getBooksByTags(tags: string) {
     const books = await prisma.books.findMany({

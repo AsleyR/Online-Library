@@ -1,5 +1,5 @@
-import { PrismaClient, comments } from "@prisma/client"
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
+import { comments } from "@prisma/client"
 
 /**
  * 

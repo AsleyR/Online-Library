@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
 
 export async function POST(request: Request) {
     const res = await request.json()

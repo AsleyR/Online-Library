@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
 
 export default async function getCommentByBookId(bookId: string) {
     const comments = await prisma.comments.findMany({

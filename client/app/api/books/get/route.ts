@@ -1,6 +1,8 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
 
+/**
+ * Takes the search params 'userEmail' to get documents that match.
+ */
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     // const res = await request.json()
@@ -18,16 +20,6 @@ export async function GET(request: Request) {
             }
         }
     }
-
-
-
-    // if (!res.title || !res.author || !res.bookReleaseDate || !res.publishedBy || !res.tags) {
-    //     return new Response(JSON.stringify({
-    //         error: "Wrong request.",
-    //     }), {
-    //         status: 400
-    //     })
-    // }
 
     const books = await prisma.books.findMany(reqObject).catch(error => error)
 

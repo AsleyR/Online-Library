@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client"
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
 
 export default async function deleteCommentById(commentId: string) {
     const deletedComment = await prisma.books.delete({

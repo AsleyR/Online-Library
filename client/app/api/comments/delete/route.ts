@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client';
-const prisma = new PrismaClient()
+import { prisma } from "@/app/(libs)/client"
 
 // Delete comment(s)
 export async function POST(request: Request) {
