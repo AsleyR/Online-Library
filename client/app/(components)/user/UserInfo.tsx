@@ -1,9 +1,11 @@
 "use client"
 
 import { useUser } from "@auth0/nextjs-auth0/client"
+import { books } from "@prisma/client"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
+import UserBooks from "../book/UserBooks"
 
 const LogoutButton = () => {
     return (
@@ -13,9 +15,16 @@ const LogoutButton = () => {
     )
 }
 
-export default function UserInfo() {
+export default function UserInfo({ books }: { books: books[] }) {
     const router = useRouter()
     const { user, error, isLoading } = useUser()
+
+    let userBooks = []
+    books.map((book) => {
+        if (book.publishedBy.email === user?.email) {
+            userBooks.push(book)
+        }
+    })
 
     useEffect(() => {
         if (!user) {
@@ -37,6 +46,7 @@ export default function UserInfo() {
             <div className="flex justify-center">
                 <LogoutButton />
             </div>
+            <UserBooks books={books} />
         </>
     )
 }
