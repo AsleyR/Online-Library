@@ -30,7 +30,7 @@ export default function DangerZone({ book }: { book: books }) {
     return (
         <>
             <div className="">
-                <div className="bg-gray-200 rounded p-3 cursor-pointer"
+                <div className="bg-gray-200 hover:bg-gray-300 duration-200 rounded p-3 cursor-pointer"
                     onClick={() => setIsOpen(!isOpen)}
                 >
                     <h1 className="text-red-500 font-bold">Danger zone</h1>
