@@ -11,7 +11,7 @@ import UserIcon from "../user-icons/UserIcon"
 const AddBookButton = () => {
     return (
         <Link
-            className="w-8 h-8 bg-gray-100 hover:bg-gray-200 rounded cursor-pointer flex justify-center items-center"
+            className="w-8 h-8 bg-gray-100 border-2 border-gray-400 hover:border-none hover:bg-gray-300 rounded cursor-pointer flex justify-center items-center"
             href={'/books/create'}
         >
             <FontAwesomeIcon className="w-10 text-lg" icon={faPlus} />
@@ -26,7 +26,7 @@ const NavLinks = () => {
     return (
         <div className="flex justify-end items-center">
             <ul className="flex gap-3 md:gap-5 justify-self-end items-center align-middle">
-                <NavSearchIcon className="flex justify-center items-center text-xl" />
+                <NavSearchIcon className="hover:bg-black/10 text-gray-700 rounded-full flex justify-center items-center text-xl" />
                 {
                     user ? <AddBookButton /> : null
                 }
