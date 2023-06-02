@@ -42,10 +42,10 @@ export default function CommentOption({ commentId }: { commentId: string }) {
                     Delete Comment
                 </button>
             </div>
-            <div className="absolute z-40 flex md:hidden bg-black/30 inset-0"
+            <div className="fixed z-40 flex md:hidden bg-black/30 inset-0"
                 onClick={() => setRender(false)}
             ></div>
-            <div className="absolute md:hidden z-50 bottom-0 inset-x-0 py-3 grid gap-3 bg-gray-100 border border-gray-300 rounded">
+            <div className="fixed md:hidden z-50 bottom-0 inset-x-0 py-3 grid gap-3 bg-gray-100 border border-gray-300 rounded">
                 <button
                     className="mx-[2rem] bg-black/80 active:scale-95 duration-200 text-white px-2 py-2 rounded"
                     onClick={() => setEdit(true)}
