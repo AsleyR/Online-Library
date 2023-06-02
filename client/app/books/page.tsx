@@ -1,6 +1,3 @@
-import Link from "next/link";
-
-import BookCard from "../(components)/book/BookCard";
 import SearchBar from "../(components)/search/SearchBar";
 import getBooksByTitle from "../(actions)/books/getBooksByTitle";
 import getAllBooks from "../(actions)/books/getAllBooks";
