@@ -2,6 +2,7 @@
 
 import { faSliders, faX } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 interface SearchBarProps {
@@ -16,6 +17,7 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ value, filter }: SearchBarProps['props']) => {
+    const router = useRouter()
     const [input, setInput] = useState<SearchBarProps['input']>({
         search: value || "",
         filter: filter || "title"
@@ -48,8 +50,14 @@ const SearchBar = ({ value, filter }: SearchBarProps['props']) => {
         })
     }
 
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        router.push(`/books?search=${input.search}&filter=${input.filter}`)
+    }
+
     return (
         <form action=""
+            onSubmit={handleSubmit}
             className="">
             <div className="flex gap-1 items-center align-middle bg-white border-2 drop-shadow-sm w-full px-3 rounded-lg">
                 <input
