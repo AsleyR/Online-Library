@@ -27,7 +27,7 @@ export default function Book({ book, bookUser }: { book: books, bookUser: UserPr
                         }
                     </div>
                 </div>
-                <div className="flex justify-end">
+                <div className="hidden md:flex justify-end">
                     <BookOptionsIcon bookId={book.id} author={book.publishedBy} />
                 </div>
             </div>
