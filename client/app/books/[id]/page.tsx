@@ -1,10 +1,10 @@
+import getUserByEmail from '@/app/(actions)/auth0/users/getUsersByEmail';
 import getBookById from '@/app/(actions)/books/getBookById';
-import getAllComments from '@/app/(actions)/comments/getAllComments';
 import getCommentByBookId from '@/app/(actions)/comments/getCommentByBookId';
+import HistoryRoute from '@/app/(components)/HistoryRoute';
 import Book from '@/app/(components)/book/Book';
-import AddComments from '@/app/(components)/comments/AddComments';
-import Comment from '@/app/(components)/comments/Comment';
 import Comments from '@/app/(components)/comments/Comments';
+import { UserProfileInfo } from '@/app/(libs)/types';
 
 interface BookPageProps {
     params: {
@@ -31,6 +31,8 @@ const BookPage = async ({ params }: BookPageProps) => {
     const book = await getBookById(params.id).catch(err => null)
     const comments = await getCommentByBookId(params.id).catch(err => null)
 
+    const bookUser: UserProfileInfo = await getUserByEmail(book?.publishedBy.email || "").then((res) => res[0])
+
     if (!book) {
         return (
             <div className="">
@@ -41,7 +43,10 @@ const BookPage = async ({ params }: BookPageProps) => {
 
     return (
         <div className='my-[2rem] flex flex-col gap-5'>
-            <Book book={book} />
+            <div className="flex flex-col gap-3">
+                <HistoryRoute text='Return to previous page' />
+                <Book book={book} bookUser={bookUser} />
+            </div>
             <Comments comments={comments} bookId={params.id} />
         </div >
     )
