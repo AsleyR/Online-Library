@@ -96,7 +96,7 @@ export default function EditBookForm({ book }: EditBookFormProps['props']) {
         const formBody = JSON.stringify({
             bookId: book.id,
             title: input.title,
-            cover: book.cover,
+            cover: bookCover,
             author: input.author,
             bookReleaseDate: input.bookReleaseDate,
             tags: editBook.tags

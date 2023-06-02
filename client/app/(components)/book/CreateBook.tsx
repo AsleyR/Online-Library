@@ -111,7 +111,7 @@ export default function CreateBook() {
         const formBody = JSON.stringify({
             title: input.title,
             author: input.author,
-            cover: book.cover,
+            cover: bookCover,
             bookReleaseDate: input.bookReleaseDate,
             publishedBy: book.publishedBy,
             tags: book.tags
