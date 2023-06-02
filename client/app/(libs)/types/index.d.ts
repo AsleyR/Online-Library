@@ -1,6 +1,8 @@
 import { UserProfile } from "@auth0/nextjs-auth0/client";
 import { books } from "@prisma/client";
 
+// Component Props
+
 export interface ComponentProps {
     className?: string;
     text?: string;
@@ -33,6 +35,12 @@ export interface BookOptionsProps extends ComponentProps {
 export interface HistoryRouteProps extends ComponentProps {
     link?: string;
 }
+
+export interface BookGenreProps {
+    genres: books['tags']
+}
+
+// Interfaces
 
 export interface UserProfileInfo extends UserProfile {
     created_at: string | null
