@@ -3,11 +3,11 @@ import { UserIconProps } from "../../(libs)/types"
 import DefaultUserIcon from "./DefaultUserIcon"
 import Image from "next/image"
 
-export default function UserIcon({ auth, picture, className }: UserIconProps) {
+export default function UserIcon({ auth, picture, link, className }: UserIconProps) {
 
     if (!auth) {
         return (
-            <Link className={`${className || ""}`} href={'/api/auth/login'}>
+            <Link className={`${className || ""} w-10 h-10`} href={'/api/auth/login'}>
                 <DefaultUserIcon />
             </Link>
         )
@@ -16,15 +16,15 @@ export default function UserIcon({ auth, picture, className }: UserIconProps) {
 
     return (
         <Link
-            className={`${className || ""}`}
-            href={'/user'}
+            className={`${className || ""} w-10 h-10`}
+            href={link ? link : '/user'}
         >
             {
                 picture !== null && picture !== undefined ?
                     <Image
-                        className="rounded-full w-10 h-10"
-                        width={100}
-                        height={100}
+                        className="rounded-full"
+                        width={500}
+                        height={500}
                         src={picture}
                         alt="user icon"
                     />
