@@ -14,14 +14,15 @@ type BooksPublishedBy {
 
 type CommentsAuthor {
   email          String
-  username       String
   profilePicture String
+  username       String
 }
 
 model books {
   id              String           @id @default(auto()) @map("_id") @db.ObjectId
   author          String
   bookReleaseDate Int
+  cover           String
   publishedBy     BooksPublishedBy
   publishedDate   DateTime         @db.Date
   tags            String[]
