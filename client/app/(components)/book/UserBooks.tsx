@@ -3,28 +3,46 @@ import BookCard from "./BookCard"
 import { books } from "@prisma/client"
 import Link from "next/link"
 import BookCards from "./BookCards";
+import { UserProfile } from "@auth0/nextjs-auth0/client";
+import capitalizeFirstLetter from "@/app/(libs)/capitalizeFirstLetter";
 
 export interface UserBooksProps extends ComponentProps {
-    // user: UserProfile | undefined
+    user?: UserProfile;
     books: books[] | null;
+    auth?: boolean
 }
 
-export default function UserBooks({ books }: UserBooksProps) {
-    // const books = await getBooksByUserEmail(user?.email || "").catch(err => null)
+export default function UserBooks({ books, user, auth }: UserBooksProps) {
 
-    if (!books) {
+    auth = auth ? true : false // HAHAHAHA
+
+    if (!books || books.length === 0) {
         return (
-            <div className="">
-                <h1 className='font-bold text-2xl'>My books</h1>
-                <p className="">{`You haven't uploaded any book entries yet!`}</p>
+            <div className="border border-gray-300 p-5 drop-shadow-sm rounded">
+                <h1 className='font-bold text-2xl'>
+                    {
+                        auth ? "My books" : `Published books`
+                    }
+                </h1>
+                {
+                    auth ?
+                        <p className="">{`You haven't uploaded any book entries yet!`}</p>
+                        :
+                        <p className="">{`This user hasn't uploaded any book entries yet!`}</p>
+                }
             </div>
         )
     }
 
 
     return (
-        <div className="flex flex-col gap-5">
-            <h1 className='font-bold text-2xl'>My books</h1>
+        <div className="flex flex-col gap-5 border border-gray-300 p-5 drop-shadow-sm rounded">
+            <h1 className='font-bold text-2xl'>
+                {
+                    auth ?
+                        "My books" : `Published books`
+                }
+            </h1>
             <BookCards books={books} />
         </div>
     )
