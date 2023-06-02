@@ -23,7 +23,7 @@ export default function RootLayout({
       >
         <UserProvider>
           <Navbar />
-          <div className="px-mobilex md:px-normalx my-[2rem]">
+          <div className="">
             {children}
           </div>
         </UserProvider>
