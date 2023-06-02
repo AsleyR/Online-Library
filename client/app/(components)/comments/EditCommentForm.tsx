@@ -76,7 +76,7 @@ export default function EditCommentForm({ className, comment }: EditCommentFormP
             </div>
             <div className="flex gap-1">
                 <button
-                    className="bg-black/80 hover:bg-black/90 duration-200 text-white border-black px-3 py-1 rounded"
+                    className="bg-black/80 text-white duration-200 hover:bg-black/60 px-3 py-1 rounded"
                     type={'button'}
                     onClick={() => setCommentOptions({ render: false, delete: false, edit: false })}
                 >
@@ -84,9 +84,9 @@ export default function EditCommentForm({ className, comment }: EditCommentFormP
                 </button>
                 <button
                     type={'submit'}
-                    className="bg-red-500 text-white hover:bg-red-600 duration-200 rounded px-3 py-1"
+                    className="bg-gray-100 text-gray-800 border border-gray-600 hover:bg-green-600 hover:border-green-600 hover:text-white duration-200 rounded px-3 py-1"
                 >
-                    Save
+                    Edit
                 </button>
             </div>
         </form>
