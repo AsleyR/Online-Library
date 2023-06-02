@@ -41,6 +41,13 @@ export async function POST(request: Request) {
                 "id": res.bookId
             }
         }).catch(error => error)
+
+        // Delete all comments with the same book id
+        const deleteBookComments = await prisma.comments.deleteMany({
+            "where": {
+                "bookId": res.bookId
+            }
+        })
     }
 
     return new Response(JSON.stringify(deleteBook), {
