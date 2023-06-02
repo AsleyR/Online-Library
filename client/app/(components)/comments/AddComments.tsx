@@ -88,9 +88,9 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
                     alt="user icon"
                 /> : <DefaultUserIcon />
             }
-            <div className="relative max-w-xs">
+            <div className="relative w-full flex flex-col">
                 <input
-                    className=" w-full border-b bg-inherit border-black placeholder:text-black focus:outline-none active:outline-none"
+                    className="w-full bg-inherit placeholder:text-black focus:outline-none active:outline-none"
                     type={'text'}
                     name="comment"
                     id="comment"
@@ -99,6 +99,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
                     onClick={() => !user ? router.push('/api/auth/login') : null}
                     onChange={handleChange}
                 />
+                <span className="bottom-0 h-[1px] absolute inset-x-0 bg-black"></span>
             </div>
         </form>
     )
