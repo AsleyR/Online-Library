@@ -1,10 +1,7 @@
 import { ComponentProps } from "@/app/(libs)/types"
-import BookCard from "./BookCard"
 import { books } from "@prisma/client"
-import Link from "next/link"
 import BookCards from "./BookCards";
 import { UserProfile } from "@auth0/nextjs-auth0/client";
-import capitalizeFirstLetter from "@/app/(libs)/capitalizeFirstLetter";
 
 export interface UserBooksProps extends ComponentProps {
     user?: UserProfile;
@@ -14,7 +11,7 @@ export interface UserBooksProps extends ComponentProps {
 
 export default function UserBooks({ books, user, auth }: UserBooksProps) {
 
-    auth = auth ? true : false // HAHAHAHA
+    auth = auth ? true : false // HAHAHAHA, this is temporal
 
     if (!books || books.length === 0) {
         return (
