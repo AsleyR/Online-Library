@@ -1,7 +1,11 @@
+import Container from "../(components)/Container";
+
 export default function BooksLayout({ children }: { children: React.ReactNode }) {
     return (
         <section className="" >
-            {children}
+            <Container>
+                {children}
+            </Container>
         </section>
     )
 }
