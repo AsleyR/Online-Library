@@ -7,17 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import NavSearchIcon from "./NavSearchIcon"
 import UserIcon from "../user-icons/UserIcon"
-
-const AddBookButton = () => {
-    return (
-        <Link
-            className="w-8 h-8 bg-gray-100 border-2 border-gray-400 hover:border-none hover:bg-gray-300 rounded cursor-pointer flex justify-center items-center"
-            href={'/books/create'}
-        >
-            <FontAwesomeIcon className="w-10 text-lg" icon={faPlus} />
-        </Link>
-    )
-}
+import AddBookButton from "../AddBookButton"
 
 const NavLinks = () => {
 
