@@ -8,7 +8,6 @@ import { useState } from "react"
 export default function DangerZone({ book }: { book: books }) {
     const router = useRouter()
 
-    const [isOpen, setIsOpen] = useState<boolean>(false)
     const [isDelete, setIsDelete] = useState<boolean>(false)
     const [confirmation, setConfirmation] = useState<string>("")
     const confimationString = `sudo rm book '${book.title}'`
@@ -19,8 +18,10 @@ export default function DangerZone({ book }: { book: books }) {
     }
 
     function deleteCurrentBook() {
-        deleteBook(book.id)
-        router.push('/')
+        deleteBook(book.id).then(() => {
+            router.prefetch('/books')
+            router.push('/books')
+        })
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,35 +31,34 @@ export default function DangerZone({ book }: { book: books }) {
     return (
         <>
             <div className="">
-                <div className="bg-gray-200 hover:bg-gray-300 duration-200 rounded p-3 cursor-pointer"
-                    onClick={() => setIsOpen(!isOpen)}
+                <div className="rounded-t p-3"
                 >
-                    <h1 className="text-red-500 font-bold">Danger zone</h1>
+                    <h1 className="text-black text-lg">Danger zone</h1>
                 </div>
-                {
-                    isOpen ?
-                        <div className="bg-black/70 rounded-b py-5">
-                            <div className="flex px-3">
-                                <button className="bg-red-500 text-white hover:bg-red-600 duration-200 px-10 py-3 rounded"
-                                    onClick={() => setIsDelete(true)}
-                                >
-                                    Delete Book
-                                </button>
-                            </div>
+                <div className="bg-red-100 rounded py-5">
+                    <div className="grid grid-flow-col items-center align-middle gap-3 px-5 py-2">
+                        <div className="flex flex-col">
+                            <h3 className="font-medium">Delete this book</h3>
+                            <p className="">All comments inside this book will be deleted</p>
                         </div>
-                        : null
-                }
+                        <button className="bg-red-500 text-white hover:bg-red-600 duration-200 px-5 py-2 rounded justify-self-end"
+                            onClick={() => setIsDelete(true)}
+                        >
+                            Delete book
+                        </button>
+                    </div>
+                </div>
             </div>
             {
                 isDelete ?
                     <div className="">
-                        <div className="absolute z-40 inset-0 bg-black/40 h-full" onClick={() => setIsDelete(false)}></div>
-                        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto z-50 bg-gray-100 rounded border-2 drop-shadow">
+                        <div className="fixed z-40 inset-0 bg-black/40 h-full" onClick={() => { setIsDelete(false); setConfirmation('') }}></div>
+                        <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 mx-auto z-50 bg-gray-100 rounded border-2 drop-shadow">
                             <div className="grid gap-3 p-[2rem]">
                                 <h1 className="font-medium">Confirm your choice by writing the following phrase</h1>
-                                <p className="font-bold bg-gray-300 py-2 text-red-500 text-center">{confimationString}</p>
+                                <p className="font-bold bg-gray-200 py-2 text-red-500 text-center rounded-sm">{confimationString}</p>
                                 <input
-                                    className="bg-black/50 text-white font-bold px-3 py-2 focus:outline-none text-center"
+                                    className="bg-black/60 text-white border border-gray-600 px-3 py-2 focus:outline-none text-center rounded-sm"
                                     onChange={handleChange}
                                     id="confirmation"
                                     name="confirmation"
@@ -66,11 +66,11 @@ export default function DangerZone({ book }: { book: books }) {
                                 />
                                 <div className="grid grid-cols-2 gap-3 text-white">
                                     <button className="bg-black/80 hover:bg-black/90 duration-200 px-3 py-2 rounded"
-                                        onClick={() => { setIsDelete(false); setIsOpen(false) }}
+                                        onClick={() => { setIsDelete(false); }}
                                     >
                                         Cancel
                                     </button>
-                                    <div className={`${doesStringsMatch(confirmation, confimationString) ? "bg-red-500 hover:bg-red-600 cursor-pointer" : "bg-red-800/40 cursor-not-allowed"} text-center duration-200 px-3 py-2 rounded font-bold`}
+                                    <div className={`${doesStringsMatch(confirmation, confimationString) ? "bg-red-500 hover:bg-red-600 cursor-pointer" : "bg-red-500/70 cursor-not-allowed"} text-center duration-200 px-3 py-2 rounded font-bold`}
                                         onClick={() => { doesStringsMatch(confirmation, confimationString) ? deleteCurrentBook() : null }}
                                     >
                                         Delete book
