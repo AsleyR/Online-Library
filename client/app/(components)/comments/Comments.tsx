@@ -11,7 +11,7 @@ export default function Comments({ comments, bookId }: CommentsProps) {
     if (!comments) {
         return (
             <div className="flex flex-col gap-3 max-w-none md:max-w-xl transition-all">
-                <h1 className='font-bold text-xl'>
+                <h1 className='font-bold text-lg'>
                     0 Comments
                 </h1>
                 <AddComments bookId={bookId} />
@@ -20,8 +20,8 @@ export default function Comments({ comments, bookId }: CommentsProps) {
     }
 
     return (
-        <div className="flex flex-col gap-3 max-w-none md:max-w-xl transition-all">
-            <h1 className='font-bold text-xl'>
+        <div className="grid grid-flow-row gap-3 max-w-full md:max-w-xl transition-all">
+            <h1 className='font-bold text-lg'>
                 {comments?.length} {comments?.length === 1 && comments?.length ? "Comment" : "Comments"}
             </h1>
             <AddComments bookId={bookId} />
