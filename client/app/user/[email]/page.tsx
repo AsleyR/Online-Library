@@ -1,9 +1,9 @@
 import getUserByEmail from "@/app/(actions)/auth0/users/getUsersByEmail"
 import getAllBooks from "@/app/(actions)/books/getAllBooks"
-import UserBooks from "@/app/(components)/book/UserBooks"
+import ButtonLink from "@/app/(components)/ButtonLink"
 import UserInfoIcon from "@/app/(components)/user-icons/UserInfoIcon"
 import UserInfo from "@/app/(components)/user/UserInfo"
-import filterBooksByEmail from "@/app/(libs)/filterBooksByEmail"
+import UserNotFound from "@/app/(components)/user/UserNotFound"
 import { UserProfileInfo } from "@/app/(libs)/types"
 
 interface UserIdPageProps {
@@ -17,15 +17,11 @@ export default async function UserIdPage({ params }: UserIdPageProps) {
 
     if (!user) {
         return (
-            <div className="flex flex-col gap-5">
-                <h1 className="font-bold text-3xl">User doesn't exist</h1>
-            </div>
+            <UserNotFound />
         )
     }
 
     const books = await getAllBooks()
-
-    const userBooks = filterBooksByEmail(books, user.email || "")
 
     return (
         <div className="flex flex-col gap-5">
