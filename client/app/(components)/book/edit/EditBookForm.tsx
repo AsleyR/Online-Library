@@ -108,7 +108,10 @@ export default function EditBookForm({ book }: EditBookFormProps['props']) {
             method: "POST",
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
             body: formBody
-        }).catch(err => console.log(err)).then(() => router.push(`/books/${book.id}`))
+        }).catch(err => console.log(err)).then(() => {
+            router.prefetch(`/books/${book.id}`)
+            router.push(`/books/${book.id}`)
+        })
     }
 
     return (
