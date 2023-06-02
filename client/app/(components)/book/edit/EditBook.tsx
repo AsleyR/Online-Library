@@ -4,9 +4,7 @@ import { useUser } from "@auth0/nextjs-auth0/client"
 import { books } from "@prisma/client"
 import { useRouter } from "next/navigation"
 import EditBookForm from "./EditBookForm"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons"
-import DangerZone from "../book-options/DangerZone"
+import HistoryRoute from "../../HistoryRoute"
 
 interface EditBookProps {
     book: books
@@ -33,16 +31,8 @@ export default function EditBook({ book }: EditBookProps) {
     return (
         <>
             <div className="flex flex-col gap-3">
-                <div className="flex">
-                    <div
-                        className="flex items-center gap-1 cursor-pointer"
-                        onClick={() => router.back()}
-                    >
-                        <FontAwesomeIcon icon={faChevronLeft} />
-                        <p>Return to book</p>
-                    </div>
-                </div>
-                <h1 className="font-bold text-2xl">Edit book</h1>
+                <HistoryRoute text="Return to book" />
+                <h1 className="font-bold text-2xl">Book options</h1>
                 <EditBookForm book={book} />
             </div>
         </>
