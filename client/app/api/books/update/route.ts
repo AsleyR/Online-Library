@@ -13,7 +13,7 @@ export async function POST(request: Request) {
         })
     }
 
-    if (!res.bookId || !res.author || !res.title || !res.bookReleaseDate || !res.tags) {
+    if (!res.bookId || !res.author || !res.cover || !res.title || !res.bookReleaseDate || !res.tags) {
 
         !res.bookId ? cause.push("bookId") : null // Inmutable
         !res.title ? cause.push("title") : null
@@ -36,6 +36,7 @@ export async function POST(request: Request) {
         "data": {
             "title": res.title,
             "author": res.author,
+            "cover": res.cover,
             "bookReleaseDate": res.bookReleaseDate,
             "tags": res.tags
         }
