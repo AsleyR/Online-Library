@@ -15,6 +15,14 @@ interface UserIdPageProps {
 export default async function UserIdPage({ params }: UserIdPageProps) {
     const user: UserProfileInfo = await getUserByEmail(params.email).then((res) => res[0])
 
+    if (!user) {
+        return (
+            <div className="flex flex-col gap-5">
+                <h1 className="font-bold text-3xl">User doesn't exist</h1>
+            </div>
+        )
+    }
+
     const books = await getAllBooks()
 
     const userBooks = filterBooksByEmail(books, user.email || "")
