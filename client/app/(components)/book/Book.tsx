@@ -3,7 +3,7 @@ import BookOptionsIcon from "./BookOptionsIcon"
 import BookUserAuthor from "./BookUserAuthor"
 import BookCover from "./BookCover"
 import { UserProfileInfo } from "@/app/(libs)/types"
-import Tag from "../tag"
+import BookGenre from "./BookGenre"
 
 export default function Book({ book, bookUser }: { book: books, bookUser: UserProfileInfo }) {
 
@@ -14,23 +14,17 @@ export default function Book({ book, bookUser }: { book: books, bookUser: UserPr
                     <div className="">
                         <BookCover cover={book.cover} />
                     </div>
-                    <div className="">
-                        <h1 className='font-bold text-3xl'>{book.title}</h1>
-                        <h3 className='text-lg italic'>{book.author}</h3>
-                        <p className=''>{book.bookReleaseDate}</p>
-                        <div className="grid gap-1 mb-5">
-                            <h2 className="font-medium">Genre</h2>
-                            <div className="flex flex-wrap gap-2 max-w-sm">
-                                {
-                                    book.tags.map((tag, index) => {
-                                        return (
-                                            <Tag key={`${index}-{tag}-tag`} text={tag} />
-                                        )
-                                    })
-                                }
-                            </div>
+                    <div className="flex flex-col gap-3">
+                        <div className="">
+                            <h1 className='font-bold text-3xl'>{book.title}</h1>
+                            <h3 className='text-lg italic'>{book.author}</h3>
+                            <p className=''>{book.bookReleaseDate}</p>
                         </div>
                         <BookUserAuthor book={book} user={bookUser} />
+                        {
+                            book.tags.length !== 0 ?
+                                <BookGenre genres={book.tags} /> : null
+                        }
                     </div>
                 </div>
                 <div className="flex justify-end">
