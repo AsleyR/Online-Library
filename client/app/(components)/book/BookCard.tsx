@@ -6,9 +6,9 @@ export default function BookCard({ book }: { book: books }) {
 
     return (
         <div className="bg-gray-100 border border-gray-300 rounded-lg drop-shadow-md w-full hover:scale-105 transition-all">
-            <div className="overflow-clip h-[7rem] rounded-t-lg">
+            <div className="overflow-hidden h-[7rem] rounded-t-lg">
                 <Image
-                    className=""
+                    className="]"
                     width={400}
                     height={400}
                     src={book.cover || defaultBookCover}
