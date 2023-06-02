@@ -25,6 +25,7 @@ export default function BookCover({ cover }: BookCoverProps['props']) {
                         <div className="grid justify-center align-middle">
                             <Image
                                 className="bg-cover w-[25rem]"
+                                priority
                                 width={500}
                                 height={500}
                                 src={bookCover}
