@@ -6,7 +6,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import { useContext } from "react";
 import { BookCoverContext } from "../book/CreateBook";
 
-export const CloudinaryImageBasePath = "https://res.cloudinary.com/dapix4xbf/image/upload/"
+export const CloudinaryImageBasePath = `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload/`
 
 interface UploadWidgetProps extends ComponentProps {
 }
@@ -22,7 +22,7 @@ export default function UploadWidget({ className, text }: UploadWidgetProps) {
     return (
         <CldUploadWidget
             onUpload={handleUpload}
-            uploadPreset="binht0de"
+            uploadPreset={process.env.NEXT_PUBLIC_UPLOAD_PRESET}
             options={{
                 "sources": ['local', 'url']
             }}
