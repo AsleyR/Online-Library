@@ -2,15 +2,12 @@
 
 import { comments } from "@prisma/client";
 import CommentOptions from "./comment-options/CommentOptions";
-import DefaultUserIcon from "../user-icons/DefaultUserIcon";
 import { CommentOptionsType } from "@/app/(libs)/context/CommentOptions";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import EditCommentForm from "./EditCommentForm";
 import UserIcon from "../user-icons/UserIcon";
-import deleteComment from "@/app/(libs)/deleteComment";
 import { useRouter } from "next/navigation";
-import deleteBookById from "@/app/(actions)/books/delete/deleteBookById";
-import deleteCommentById from "@/app/(actions)/comments/delete/deleteCommentById";
+import getFullDateWithoutWeekDate from "@/app/(libs)/getFullDateWithoutWeekDate";
 
 export const CommentOptionsContext = createContext<CommentOptionsType | null>(null)
 
@@ -22,32 +19,26 @@ export default function Comment({ comment }: { comment: comments }) {
         "delete": false
     })
 
-    // const deleteComment = async () => {
-    //     if (commentOptions.delete) {
-    //         await deleteCommentById(comment.id)
-    //     }
-    // }
-
-    // deleteComment()
-
-    // useEffect(() => {
-    //     deleteComment(comment.id)
-    //     setCommentOptions({ render: false, edit: false, delete: false })
-    // }, [commentOptions.delete === true])
-
     return (
         <CommentOptionsContext.Provider value={{ commentOptions, setCommentOptions }}>
             <div className="grid grid-cols-[min-content_auto_min-content] items-start gap-3 bg-gray-200 rounded-lg p-3">
-                <UserIcon auth={true} picture={comment.author.profilePicture} className="w-10 h-10" />
-                <div className="">
+                <UserIcon auth={true} picture={comment.author.profilePicture} link={`/user/${comment.author.email}`} className="w-10 h-10" />
+                <div className="w-full">
                     <div className="flex flex-col md:flex-row gap-1 md:items-center">
                         <h1 className="font-medium text-lg">{comment.author.username}</h1>
                         <p className="hidden md:block">•</p>
-                        <span className="-mt-[0.6rem] md:mt-0 text-sm">{`${comment.publishedDate.toDateString()}`}</span>
+                        <span className="-mt-[0.6rem] md:mt-0 text-sm">{getFullDateWithoutWeekDate(comment.publishedDate)}</span>
                     </div>
                     {
                         commentOptions.edit ? <EditCommentForm comment={comment} /> : <p className="">{comment.comment}</p>
                     }
+                    {/* <div className="flex gap-3">
+                        <LikeButton commentId={comment.id} />
+                        <DislikeButton commentId={comment.id} />
+                        <button className="w-8 h-8 hover:bg-gray-100 flex justify-center align-middle items-center rounded-full transition-all relative">
+                            <FontAwesomeIcon className="w-4" icon={faCommentDots} />
+                        </button>
+                    </div> */}
                 </div>
                 <CommentOptions
                     commentId={comment.id}
