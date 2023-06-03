@@ -37,7 +37,7 @@ export default function BookCover({ cover }: BookCoverProps['props']) {
             }
             <div
                 onClick={() => setShowCover(true)}
-                className="relative z-10 grid w-full h-[160px] md:h-[323px] overflow-hidden justify-center md:w-[15rem] bg-black/20 rounded-lg md:rounded">
+                className="relative z-10 grid w-full h-[160px] md:h-[323px] overflow-y-hidden justify-center md:w-[15rem] bg-black/20 rounded-lg md:rounded">
                 <div className="absolute md:hidden inset-0 hover:bg-black/30 cursor-pointer transition-all z-20"></div>
                 <Image
                     className="bg-cover"
