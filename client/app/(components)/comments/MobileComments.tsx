@@ -7,8 +7,11 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons"
 import AddComments from "./AddComments"
 import Image from "next/image"
 import Comment from "./Comment"
+import UserIcon from "../user-icons/UserIcon"
+import { useUser } from "@auth0/nextjs-auth0/client"
 
 export default function MobileComments({ comments, bookId }: CommentsProps) {
+    const { user, error, isLoading } = useUser()
     const [mobileComments, setMobileComments] = useState<boolean>(false)
 
     return (
@@ -51,14 +54,14 @@ export default function MobileComments({ comments, bookId }: CommentsProps) {
                     </> :
                     <div
                         onClick={() => setMobileComments(true)}
-                        className="bg-gray-200 hover:bg-gray-300 active:bg-gray-300 active:border active:border-white flex flex-col lg:hidden max-w-none lg:max-w-xl rounded-lg transition-all cursor-pointer"
+                        className="bg-gray-200 hover:bg-gray-300 active:bg-gray-300 active:border active:border-white flex flex-col md:hidden max-w-none lg:max-w-xl rounded-lg transition-all cursor-pointer"
                     >
                         <h1 className='p-3 -mb-2 font-bold text-base'>
                             Comments <span className="font-medium">{comments?.length}</span>
                         </h1>
                         {
                             comments && comments.length !== 0 ?
-                                <div className="flex items-center gap-3 px-3 pb-3">
+                                <div className="flex md:hidden items-center gap-3 px-3 pb-3">
                                     <div className="">
                                         <Image
                                             className="w-10 rounded-full"
@@ -75,7 +78,15 @@ export default function MobileComments({ comments, bookId }: CommentsProps) {
                                             }
                                         </p>
                                     </div>
-                                </div> : <AddComments bookId={bookId} />
+                                </div> :
+                                <div className="flex items-center gap-3 px-3 pb-3">
+                                    <UserIcon auth={user ? true : false} picture={user?.picture} link={null} />
+                                    <div className="w-full border-b border-black">
+                                        <p>
+                                            Add a comment
+                                        </p>
+                                    </div>
+                                </div>
                         }
                     </div>
             }
