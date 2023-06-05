@@ -1,6 +1,6 @@
 "use client"
 
-import { faSliders, faX } from "@fortawesome/free-solid-svg-icons"
+import { faSliders, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -76,7 +76,7 @@ const SearchBar = ({ value, filter }: SearchBarProps['props']) => {
                             type={'button'}
                             onClick={deleteInput}
                         >
-                            <FontAwesomeIcon className="" icon={faX} />
+                            <FontAwesomeIcon className="" icon={faXmark} />
                         </button>
                         : null
                 }
