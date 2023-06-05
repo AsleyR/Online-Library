@@ -12,7 +12,7 @@ export default function UserInfoIcon({ user }: UserInfoIconProps) {
 
     return (
         <div className="flex gap-2 items-center">
-            <UserIcon auth={true} picture={user.picture} link="/"
+            <UserIcon auth={true} picture={user.picture} link={null}
                 className="w-[3.5rem] h-[3.5rem] cursor-default"
             />
             <div className="flex flex-col">
