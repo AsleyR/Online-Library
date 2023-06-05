@@ -8,10 +8,15 @@ import EditCommentForm from "./EditCommentForm";
 import UserIcon from "../user-icons/UserIcon";
 import { useRouter } from "next/navigation";
 import getFullDateWithoutWeekDate from "@/app/(libs)/getFullDateWithoutWeekDate";
+import { ComponentProps } from "@/app/(libs)/types";
 
 export const CommentOptionsContext = createContext<CommentOptionsType | null>(null)
 
-export default function Comment({ comment }: { comment: comments }) {
+interface CommentProps extends ComponentProps {
+    comment: comments
+}
+
+export default function Comment({ comment, className }: CommentProps) {
     const router = useRouter()
     const [commentOptions, setCommentOptions] = useState<CommentOptionsType['commentOptions']>({
         "render": false,
@@ -21,7 +26,7 @@ export default function Comment({ comment }: { comment: comments }) {
 
     return (
         <CommentOptionsContext.Provider value={{ commentOptions, setCommentOptions }}>
-            <div className="grid grid-cols-[min-content_auto_min-content] items-start gap-3 bg-gray-200 rounded-lg p-3">
+            <div className={`${className || ""} grid grid-cols-[min-content_auto_min-content] items-start gap-3 rounded-lg p-3`}>
                 <UserIcon auth={true} picture={comment.author.profilePicture} link={`/user/${comment.author.email}`} className="w-10 h-10" />
                 <div className="w-full">
                     <div className="flex flex-col md:flex-row gap-1 md:items-center">

@@ -14,7 +14,7 @@ interface AddCommentsProps {
     comment: comments
 }
 
-export default function AddComments({ bookId }: { bookId: comments['bookId'] }) {
+export default function AddComments({ bookId, className }: { bookId: comments['bookId'], className?: string }) {
     const router = useRouter()
     const { user, error, isLoading } = useUser()
 
@@ -77,7 +77,7 @@ export default function AddComments({ bookId }: { bookId: comments['bookId'] }) 
     return (
         <form action={"/api/comments/create"} method={'POST'}
             onSubmit={handleSubmit}
-            className="flex items-center align-middle gap-2 bg-gray-200 rounded-lg p-3"
+            className={`${className || ""} flex items-center align-middle gap-2 rounded-lg p-3`}
         >
             {
                 user && user.picture ? <Image
