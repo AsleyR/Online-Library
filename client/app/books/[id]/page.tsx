@@ -40,7 +40,7 @@ const BookPage = async ({ params }: BookPageProps) => {
     const bookUser: UserProfileInfo = await getUserByEmail(book?.publishedBy.email || "").then((res) => res[0])
 
     const parsedRandomBooks: any[] = []
-    const randomBooks = await getRandomBooks().then((books) => {
+    const randomBooks = await getRandomBooks(99).then((books) => {
         books.map((book: any) => {
             if (book.id !== params.id) {
                 parsedRandomBooks.push(book)
