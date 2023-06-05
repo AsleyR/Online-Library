@@ -14,7 +14,7 @@ export default function Book({ book, bookUser }: { book: books, bookUser: UserPr
                     <div className="">
                         <BookCover cover={book.cover} />
                     </div>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 max-w-full md:max-w-sm">
                         <div className="">
                             <h1 className='font-bold text-3xl'>{book.title}</h1>
                             <h3 className='text-lg italic'>{book.author}</h3>
