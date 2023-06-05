@@ -19,7 +19,7 @@ export interface ButtonLinkProps extends ComponentProps {
 export interface UserIconProps extends ComponentProps {
     auth: boolean;
     picture: string | null | undefined;
-    link?: string
+    link?: string | null
 }
 
 export interface CommentOptionsProps extends ComponentProps {
