@@ -11,7 +11,7 @@ export default function NavSearchIcon({ className, link }: NavSearchIconProps) {
     return (
         <Link
             className={`${className || ""} w-10 h-10`}
-            href={link || "/books"}
+            href={link || "/"}
         >
             <FontAwesomeIcon className="w-min" icon={faSearch} />
         </Link>
