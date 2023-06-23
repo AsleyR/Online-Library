@@ -13,10 +13,11 @@ interface SearchBarProps {
     props: {
         value?: string;
         filter?: string;
+        redirect?: string;
     }
 }
 
-const SearchBar = ({ value, filter }: SearchBarProps['props']) => {
+const SearchBar = ({ value, filter, redirect }: SearchBarProps['props']) => {
     const router = useRouter()
     const [input, setInput] = useState<SearchBarProps['input']>({
         search: value || "",
@@ -52,7 +53,8 @@ const SearchBar = ({ value, filter }: SearchBarProps['props']) => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        router.push(`/books?search=${input.search}&filter=${input.filter}`)
+        redirect ? router.push(`/${redirect}?search=${input.search}&filter=${input.filter}`)
+            : router.push(`/?search=${input.search}&filter=${input.filter}`)
     }
 
     return (
