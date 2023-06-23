@@ -2,48 +2,77 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Container from './(components)/Container'
 import ButtonLink from './(components)/ButtonLink'
+import getBooksByTitle from './(actions)/books/getBooksByTitle'
+import getAllBooks from './(actions)/books/getAllBooks'
+import getBooksByAuthor from './(actions)/books/getBooksbyAuthor'
+import getBooksByTags from './(actions)/books/getBooksByTags'
+import getBooksByYear from './(actions)/books/getBooksByYear'
+import SearchBar from './(components)/search/SearchBar'
+import BookCards from './(components)/book/BookCards'
 
-const HeroImage = () => {
-  return (
-    <div className="hidden lg:grid justify-end">
-      <Image
-        className=''
-        priority
-        width={1000}
-        height={1000}
-        src={'/images/read-book.jpg'}
-        alt='Person reading book'
-      />
-    </div>
-  )
+interface HomePageProps {
+  searchParams: {
+    search?: string;
+    filter?: string;
+  }
 }
 
-const Hero = () => {
+type MetadataProps = {
+  searchParams: {
+    search?: string;
+  }
+}
+
+export function generateMetadata({ searchParams }: MetadataProps) {
+  const search = searchParams.search || "Search"
+
+  return {
+    'title': `${search} - Online Library`
+  }
+}
+
+export default async function Home({ searchParams }: HomePageProps) {
+  const searchParam = searchParams.search
+  const filter = searchParams.filter || "title"
+
+  let books: any[] = [] // Books[]
+
+  switch (filter) {
+    case "title":
+      books = searchParam ? await getBooksByTitle(searchParam) : await getAllBooks()
+      break;
+
+    case "author":
+      books = searchParam ? await getBooksByAuthor(searchParam) : await getAllBooks()
+      break;
+
+    case "year":
+      books = searchParam ? await getBooksByYear(searchParam) : await getAllBooks()
+      break;
+
+    case "tags":
+      books = searchParam ? await getBooksByTags(searchParam) : await getAllBooks()
+      break;
+
+    default:
+      books = await getAllBooks();
+      break;
+  }
+
   return (
-    <div className='bg-black/10'>
-      <Container className='grid grid-cols-1 lg:grid-cols-2 gap-5 items-center align-middle'>
-        <div className="flex flex-col gap-[2rem]">
-          <h1 className='font-bold text-3xl md:text-5xl'>Knowledge is power.</h1>
-          <h2 className='text-xl md:text-3xl'>Read and share your favorite books with users!</h2>
-          <div className="flex">
-            <ButtonLink
-              className=''
-              text='Open Library'
-              link='/books'
-            />
-          </div>
+    <Container>
+      <main className="grid">
+        <div className="flex flex-col gap-6">
+          <SearchBar value={searchParam || ""} filter={filter} />
+          {
+            books.length !== 0 ?
+              <BookCards books={books} /> :
+              <div className="flex justify-center">
+                <h1 className="font-medium text-xl">No results</h1>
+              </div>
+          }
         </div>
-        <HeroImage />
-      </Container>
-    </div>
-  )
-}
-
-export default function Home() {
-
-  return (
-    <main className="grid">
-      <Hero />
-    </main>
+      </main>
+    </Container>
   )
 }
