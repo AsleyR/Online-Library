@@ -1,4 +1,5 @@
 <div align=center>
+<img width=60 height=60 src="client/app/icon.svg" alt="book-icon">
 <h1>Online Library</h1>
 <p>V. 0.1.1</p>
 </div>
