@@ -2,7 +2,7 @@
 
 import { BookOptionsProps } from "@/app/(libs)/types";
 import { useUser } from "@auth0/nextjs-auth0/client";
-import { faPencil, faWrench } from "@fortawesome/free-solid-svg-icons";
+import { faWrench } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 
