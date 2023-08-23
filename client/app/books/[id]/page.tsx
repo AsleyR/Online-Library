@@ -57,7 +57,7 @@ const BookPage = async ({ params }: BookPageProps) => {
     }
 
     return (
-        <div className='my-[2rem] grid grid-flow-row lg:grid-flow-col gap-3 lg:gap-[5rem] transition-all'>
+        <div className='my-[2rem] grid grid-flow-row lg:grid-cols-[auto_400px] gap-3 lg:gap-[5rem] transition-all'>
             <div className="flex flex-col gap-3">
                 <HistoryRoute text='Return to previous page' />
                 <Book book={book} bookUser={bookUser} />
