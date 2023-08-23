@@ -1,5 +1,5 @@
 import { books } from "@prisma/client"
-import BookOptionsIcon from "./BookOptionsIcon"
+import BookOptionsBtn from "./book-options/BookOptionsBtn"
 import BookUserAuthor from "./BookUserAuthor"
 import BookCover from "./BookCover"
 import { UserProfileInfo } from "@/app/(libs)/types"
@@ -9,7 +9,7 @@ export default function Book({ book, bookUser }: { book: books, bookUser: UserPr
 
     return (
         <>
-            <div className="grid grid-cols-[auto_min-content] w-full">
+            <div className="grid grid-cols-[auto_min-content] gap-3 w-full">
                 <div className="grid grid-rows-auto md:grid-cols-[min-content_auto] gap-5">
                     <div className="">
                         <BookCover cover={book.cover} />
@@ -20,15 +20,20 @@ export default function Book({ book, bookUser }: { book: books, bookUser: UserPr
                             <h3 className='text-lg italic'>{book.author}</h3>
                             <p className=''>{book.bookReleaseDate}</p>
                         </div>
-                        <BookUserAuthor book={book} user={bookUser} />
+                        <div className="grid grid-cols-[auto_min-content] gap-3 items-center w-full">
+                            <BookUserAuthor book={book} user={bookUser} />
+                            <div className="block md:hidden w-max justify-self-end self-end">
+                                <BookOptionsBtn bookId={book.id} author={book.publishedBy} />
+                            </div>
+                        </div>
                         {
                             book.tags.length !== 0 ?
                                 <BookGenre genres={book.tags} /> : null
                         }
                     </div>
                 </div>
-                <div className="hidden md:flex justify-end">
-                    <BookOptionsIcon bookId={book.id} author={book.publishedBy} />
+                <div className="hidden md:flex w-max h-min justify-end">
+                    <BookOptionsBtn bookId={book.id} author={book.publishedBy} />
                 </div>
             </div>
         </>
