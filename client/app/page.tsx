@@ -67,7 +67,7 @@ export default async function Home({ searchParams }: HomePageProps) {
           {
             books.length !== 0 ?
               <BookCards books={books} /> :
-              <div className="flex justify-center">
+              <div className="flex justify-center h-screen">
                 <h1 className="font-medium text-xl">No results</h1>
               </div>
           }
