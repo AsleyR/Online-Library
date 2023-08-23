@@ -15,7 +15,7 @@ export default function UserBooks({ books, user, auth }: UserBooksProps) {
 
     if (!books || books.length === 0) {
         return (
-            <div className="border border-gray-300 p-5 drop-shadow-sm rounded">
+            <div className="bg-white border border-gray-300 p-5 drop-shadow-sm rounded">
                 <h1 className='font-bold text-2xl'>
                     {
                         auth ? "My books" : `Published books`
@@ -33,7 +33,7 @@ export default function UserBooks({ books, user, auth }: UserBooksProps) {
 
 
     return (
-        <div className="flex flex-col gap-5 border border-gray-300 p-5 drop-shadow-sm rounded">
+        <div className="flex flex-col gap-5 bg-white border border-gray-300 p-5 drop-shadow-sm rounded">
             <h1 className='font-bold text-2xl'>
                 {
                     auth ?

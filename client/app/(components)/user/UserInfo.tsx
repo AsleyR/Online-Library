@@ -18,7 +18,7 @@ export default function UserInfo({ user, books, auth }: UserInfoProps) {
 
     return (
         <>
-            <div className="grid gap-5 border border-gray-300 rounded p-5 drop-shadow-sm">
+            <div className="grid gap-5 bg-white border border-gray-300 rounded p-5 drop-shadow-sm">
                 <h1 className='font-bold text-2xl'>Account info</h1>
                 <div className="">
                     <div className="flex flex-col border-t border-gray-300 py-3">
